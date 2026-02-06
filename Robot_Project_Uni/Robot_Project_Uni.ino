@@ -7,16 +7,26 @@ extern State CurrentState;
 extern Action LastTurn;
 extern const int base;
 extern const int turn;
-extern const int reversebase; // Keep all of the above
+extern const int reversebase; 
+// Keep all of the above
 
-extern int PlateHits;
-extern bool FrontSeenForPlate;
-extern bool PrevIR_F;
-extern bool PrevIR_R;
+extern bool FronteSeenForPlate;
+extern bool PrevIR_F, PrevIR_R;
 extern const unsigned long FrontTimeoutMS;
-extern unsigned long FrontSeenTime; // Remove if you want
+extern unsigned long FrontSeenTime;
+extern int PlateHits, mr, ml, sl, sc, sr, led; 
+// Remove if you want
 
 void setup() {
+  pinMode(mr, OUTPUT);
+  pinMode(ml, OUTPUT);
+  pinMode(sl, INPUT);
+  pinMode(sc, INPUT);
+  pinMode(sr, INPUT);
+
+  pinMode(led, OUTPUT);
+
+  delay(1000);
   Serial.begin(9600);
 }
 

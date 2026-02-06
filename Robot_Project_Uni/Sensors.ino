@@ -1,4 +1,10 @@
+#include "Config.h"
+#include "motors.h"
+
 extern bool SimMode;
+extern int sl, sc, sr;
+extern const int LineActiveLevel;
+
 void GetLineSensors(int &L, int &C, int &R) {
   if (SimMode)  {
     static int step = 0; 
@@ -22,7 +28,16 @@ void GetLineSensors(int &L, int &C, int &R) {
     }
     
     return;
-  } 
+  }
+
+  int rawL = digitalRead(sl);
+  int rawC = digitalRead(sc); 
+  int rawR = digitalRead(sr);
+
+  L = (rawL == LineActiveLevel) ? 1 : 0;
+  C = (rawC == LineActiveLevel) ? 1 : 0;
+  R = (rawR == LineActiveLevel) ? 1 : 0;
+
 }
 
 void GetDropoffIR(int &IR_F, int &IR_R) {

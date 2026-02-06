@@ -13,3 +13,11 @@ const unsigned long FrontTimeoutMS = 500;
 int PlateHits = 0;
 int DeliveriesDone = 0;
 const int ignorePlates[] = {3,5};
+
+int mr = 10;
+int ml = 9;
+int sl = 6;
+int sc = 5;
+int sr = 4;
+int led = 13;
+const int LineActiveLevel = LOW;

@@ -1,4 +1,6 @@
 #include "Types.h"
+#include "Motors.h"
+
 extern State CurrentState;
 extern Action LastTurn;
 extern const int base;
@@ -35,5 +37,6 @@ void ComputeMotorSpeed(int L, int C, int R, int &LeftSpeed, int &RightSpeed) {
          LeftSpeed = 0;
          RightSpeed = 0;
         }
+     setmotorSpeed(LeftSpeed, RightSpeed);
 }
 
