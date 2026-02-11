@@ -1,4 +1,4 @@
 #pragma once
 
-void motorSetup();
+void MotorSetup();
 void SetMotorSpeed(int LeftSpeed, int RightSpeed);

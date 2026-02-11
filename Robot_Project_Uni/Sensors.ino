@@ -1,9 +1,18 @@
-#include "Config.h"
-#include "motors.h"
+#include "Sensors.h"
 
 extern bool SimMode;
-extern int sl, sc, sr;
+extern const int sl, sc, sr, TriggerFront, ReceiveFront, TriggerRear, ReceiveRear;
 extern const int LineActiveLevel;
+
+void SensorSetup() {
+  pinMode(sl, INPUT);
+  pinMode(sc, INPUT);
+  pinMode(sr, INPUT);
+  pinMode(TriggerFront, OUTPUT);
+  pinMode(ReceiveFront, INPUT);
+  pinMode(TriggerRear, OUTPUT);
+  pinMode(ReceiveRear, INPUT);
+}
 
 void GetLineSensors(int &L, int &C, int &R) {
   if (SimMode)  {
@@ -40,18 +49,17 @@ void GetLineSensors(int &L, int &C, int &R) {
 
 }
 
-void GetDropoffIR(int &IR_F, int &IR_R) {
-  if (SimMode) {
-    static int t=0;
-    IR_F = (t == 180 || t == 181 || t == 182 || t == 183) ? 1 : 0;  
-    IR_R = (t == 184 || t == 185 || t == 186 || t == 187) ? 1 : 0;
-    
-    t++;
-    if (t>11) t = 0;
-    return;
-    
-  }
-  IR_F = 0;
-  IR_R = 0;
+float DistanceToPlate(int TriggerPin, int ReceivePin) {
+digitalWrite(TriggerPin, LOW);
+delayMicroseconds(2);
+digitalWrite(TriggerPin, HIGH);
+delayMicroseconds(10);
+digitalWrite(TriggerPin, LOW);
 
+long duration = pulseIn(ReceivePin, HIGH, 30000);
+if (duration == 0) {
+  return 1000; 
+}
+float distance_cm = duration * 0.0343 / 2;
+return distance_cm;
 }
