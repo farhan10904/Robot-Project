@@ -11,11 +11,12 @@ extern const int reversebase;
 // Keep all of the above
 
 extern bool FrontSeenForPlate;
-extern bool PrevIR_F, PrevIR_R;
+extern bool PrevFront, PrevRear;
 extern const unsigned long FrontTimeoutMS;
 extern unsigned long FrontSeenTime;
 extern const int mr, ml, sl, sc, sr, led, TriggerFront, ReceiveFront, TriggerRear, ReceiveRear, PlateDistanceThreshold; 
-extern int PlateHits, DeliveriesDone;
+extern int DeliveriesDone;
+extern const float PlateDistanceThreshold;
 // Remove if you want
 
 void setup() {
@@ -24,8 +25,11 @@ void setup() {
   pinMode(sl, INPUT);
   pinMode(sc, INPUT);
   pinMode(sr, INPUT);
-
   pinMode(led, OUTPUT);
+  pinMode(TriggerFront, OUTPUT);
+  pinMode(ReceiveFront, INPUT);
+  pinMode(TriggerRear, OUTPUT);
+  pinMode(ReceiveRear, INPUT);
 
   delay(1000);
   Serial.begin(9600);
@@ -35,48 +39,52 @@ void loop() {
   int L, C, R;
   int LeftSpeed = 0;
   int RightSpeed = 0;
+  int FrontPlate = 0;
+  int RearPlate = 0;
 
+
+  // Plate delivery logic
   GetLineSensors(L, C, R);
-
   float FrontDistance = DistanceToPlate(TriggerFront, ReceiveFront);
   float RearDistance = DistanceToPlate(TriggerRear, ReceiveRear);
 
-   if (FrontDistance <= PlateDistanceThreshold) {
+  if (FrontDistance <= PlateDistanceThreshold) {
+    FrontPlate = 1;
+  }
+  if (RearDistance <= PlateDistanceThreshold) {
+    RearPlate = 1;
+  }
+  bool FrontRise = (FrontPlate == 1) && (PrevFront == 0);
+  bool RearRise = (RearPlate == 1) && (PrevRear == 0);
+
+  if (FrontRise) {
+    PlateHits += 1; 
     FrontSeenForPlate = true;
     FrontSeenTime = millis();
+    CurrentState = ApproachDropoff;
+  }
+  if (FrontSeenForPlate) {
+    if (millis() - FrontSeenTime > FrontTimeoutMS) {
+      FrontSeenForPlate = false;
+      CurrentState = FollowLine;
+    }
+  }
+
+  if ((RearRise) && (CurrentState == ApproachDropoff) ){
     PlateHits += 1;
-    int FrontPlate = 1;
-   }
+    FrontSeenForPlate = false;
+    CurrentState = DeliverPackage;
+  }
+  else if (RearRise) {
+    PlateHits += 2;
+    FrontSeenForPlate = false;
+    DeliveriesDone += 1;
+  }
 
+  PrevFront = FrontPlate;
+  PrevRear = RearPlate;
 
-  //int IR_F = 0, IR_R = 0;
-  // GetDropoffIR(IR_F, IR_R);
-  // if (CurrentState == FollowLine || CurrentState == ApproachDropoff) {
-  //   bool FrontRise = (IR_F == 1) && (PrevIR_F == 0);
-  //   bool RearRise = (IR_R == 1) && (PrevIR_R == 0);
-  //   if (FrontRise) {
-  //     PlateHits += 1; 
-  //     FrontSeenForPlate = true;
-  //     FrontSeenTime = millis();
-  //   }
-  //   if (FrontSeenForPlate) {
-  //     if (millis() - FrontSeenTime > FrontTimeoutMS) {
-  //       FrontSeenForPlate = false;
-  //     }
-  //   }
-  //   if (RearRise) {
-  //     if (FrontSeenForPlate) {
-  //       PlateHits += 1;
-  //     }
-  //     else {
-  //       PlateHits += 2;
-  //     }
-  //     FrontSeenForPlate = false;
-  //   }
-  //   PrevIR_F = (IR_F == 1);
-  //   PrevIR_R = (IR_R == 1);
-  // }
-
+   // Line following logic 
   if (CurrentState == FollowLine) {
     ComputeMotorSpeed(L, C, R, LeftSpeed, RightSpeed);
   } 
