@@ -1,5 +1,6 @@
-#include "Config.h"
 #include "Motors.h"
+extern bool SimMode;
+extern const int mr,ml;
 
 void motorSetup() {
   pinMode(mr, OUTPUT);
