@@ -35,3 +35,8 @@ const float PlateDistanceThreshold = 15;
 
 const int StepPin = 2;
 const int DirPin = 3;
+const int StepsPerRevolution = 200;
+const int StepDelay = 500; // Microseconds between steps
+unsigned long LastDeliveryTime = 0;
+const unsigned long DeliveryCooldown = 2000; // Minimum time between deliveries in milliseconds#
+bool CoolDown = false;

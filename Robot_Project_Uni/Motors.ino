@@ -1,6 +1,6 @@
 #include "Motors.h"
 extern bool SimMode;
-extern const int mr,ml,ForwardL, ReverseL, ForwardR, ReverseR;
+extern const int mr,ml,ForwardL, ReverseL, ForwardR, ReverseR, StepPin, DirPin, StepsPerRevolution, StepDelay;
 
 void MotorSetup() {
   pinMode(mr, OUTPUT);
@@ -9,6 +9,8 @@ void MotorSetup() {
   pinMode(ReverseL, OUTPUT);
   pinMode(ForwardR, OUTPUT);
   pinMode(ReverseR, OUTPUT);
+  pinMode(StepPin, OUTPUT);
+  pinMode(DirPin, OUTPUT);
 }
 
 void DriverMotor(int Speed, int ForwardPin, int ReversePin, int PWMPin) {
@@ -45,5 +47,12 @@ void SetMotorSpeed(int LeftSpeed, int RightSpeed) {
 
 void PackageDelivery() {
   SetMotorSpeed(0, 0);
-  
+  digitalWrite(DirPin, HIGH);
+
+  for (int i = 0; i < StepsPerRevolution; i++) {
+    digitalWrite(StepPin, HIGH);
+    delayMicroseconds(StepDelay);
+    digitalWrite(StepPin, LOW);
+    delayMicroseconds(StepDelay);
+  }
 }
