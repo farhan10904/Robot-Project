@@ -29,7 +29,6 @@ if (Speed > 0) {
 }
 }
 
-
 void SetMotorSpeed(int LeftSpeed, int RightSpeed) {
    if (SimMode) {
      Serial.print("Left Motor Speed: ");
@@ -42,4 +41,9 @@ void SetMotorSpeed(int LeftSpeed, int RightSpeed) {
     DriverMotor(LeftSpeed, ForwardL, ReverseL, ml);
     DriverMotor(RightSpeed, ForwardR, ReverseR, mr);
    
+}
+
+void PackageDelivery() {
+  SetMotorSpeed(0, 0);
+  
 }

@@ -84,6 +84,14 @@ void loop() {
   PrevFront = FrontPlate;
   PrevRear = RearPlate;
 
+  // Package delivery logic
+  if (CurrentState == DeliverPackage) {
+    PackageDelivery();
+    DeliveriesDone += 1;
+    CurrentState = FollowLine;
+    delay(1000);  
+  }  
+
    // Line following logic 
   if (CurrentState == FollowLine) {
     ComputeMotorSpeed(L, C, R, LeftSpeed, RightSpeed);

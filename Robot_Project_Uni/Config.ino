@@ -32,3 +32,6 @@ const int TriggerRear = A2;
 const int ReceiveRear = A3;
 
 const float PlateDistanceThreshold = 15;
+
+const int StepPin = 2;
+const int DirPin = 3;
