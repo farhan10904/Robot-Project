@@ -42,7 +42,6 @@ void SetMotorSpeed(int LeftSpeed, int RightSpeed) {
 
     DriverMotor(LeftSpeed, ForwardL, ReverseL, ml);
     DriverMotor(RightSpeed, ForwardR, ReverseR, mr);
-   
 }
 
 void PackageDelivery() {

@@ -3,8 +3,7 @@
 
 extern State CurrentState;
 extern Action LastTurn;
-extern const int base;
-extern const int turn;
+extern const int base,turnR, turnL;
 extern const int reversebase;
 
 void ComputeMotorSpeed(int L, int C, int R, int &LeftSpeed, int &RightSpeed) { 
@@ -13,23 +12,23 @@ void ComputeMotorSpeed(int L, int C, int R, int &LeftSpeed, int &RightSpeed) {
          RightSpeed = base;
      }
      else if (L == 1 && C == 0 && R == 0) {
-         LeftSpeed = base - turn;
-         RightSpeed = base + turn;
+         LeftSpeed = base - turnL;
+         RightSpeed = base + turnL;
          LastTurn = Act_Left;
      }
      else if (L == 0 && C == 0 && R == 1) {
-         LeftSpeed = base + turn;
-         RightSpeed = base - turn;
+         LeftSpeed = base + turnR;
+         RightSpeed = base - turnR;
          LastTurn = Act_Right;
      }
      else if (L == 1 && C == 1 && R == 0) {
-         LeftSpeed = base - (turn / 2);
-         RightSpeed = base + (turn / 2);
+         LeftSpeed = base - (turnL / 2);
+         RightSpeed = base + (turnL / 2);
          LastTurn = Act_Left;
      }
      else if (L == 0 && C == 1 && R == 1) {
-         LeftSpeed = base + (turn / 2);
-         RightSpeed = base - (turn / 2);
+         LeftSpeed = base + (turnR / 2);
+         RightSpeed = base - (turnR / 2);
          LastTurn = Act_Right;
      }
      else if (L == 0 && C == 0 && R == 0) {

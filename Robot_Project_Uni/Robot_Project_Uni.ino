@@ -6,7 +6,7 @@
 extern State CurrentState;
 extern Action LastTurn;
 extern const int base;
-extern const int turn;
+extern const int turnL, turnR;
 extern const int reversebase; 
 extern bool SimMode, CoolDown;
 // Keep all of the above
@@ -19,27 +19,12 @@ extern const int mr, ml, sl, sc, sr, led, TriggerFront, ReceiveFront, TriggerRea
 extern int DeliveriesDone, PlateHits;
 extern const float PlateDistanceThreshold;
 extern unsigned long LastDeliveryTime; 
-extern const unsigned long PlateCooldown;
+extern const unsigned long DeliveryCooldown;
 // Remove if you want
 
 void setup() {
-  pinMode(mr, OUTPUT);
-  pinMode(ml, OUTPUT);
-  pinMode(sl, INPUT);
-  pinMode(sc, INPUT);
-  pinMode(sr, INPUT);
-  pinMode(led, OUTPUT);
-  pinMode(TriggerFront, OUTPUT);
-  pinMode(ReceiveFront, INPUT);
-  pinMode(TriggerRear, OUTPUT);
-  pinMode(ReceiveRear, INPUT);
-  pinMode(StepPin, OUTPUT);
-  pinMode(DirPin, OUTPUT);
-  pinMode(ForwardL, OUTPUT);
-  pinMode(ReverseL, OUTPUT);
-  pinMode(ForwardR, OUTPUT);
-  pinMode(ReverseR, OUTPUT);
-
+  void MotorSetup();
+  void SensorSetup();
   delay(1000);
   Serial.begin(9600);
 }
@@ -50,8 +35,6 @@ void loop() {
   int RightSpeed = 0;
   int FrontPlate = 0;
   int RearPlate = 0;
-  
-
 
   // Plate delivery logic
   GetLineSensors(L, C, R);
@@ -66,7 +49,7 @@ void loop() {
   }
 
   if (CoolDown) {
-    if (millis() - LastDeliveryTime > PlateCooldown) {
+    if (millis() - LastDeliveryTime > DeliveryCooldown) {
       CoolDown = false;
       PrevFront = FrontPlate;
       PrevRear = RearPlate;
@@ -130,12 +113,12 @@ void loop() {
     } 
     else {
       if (LastTurn == Act_Left) {
-        LeftSpeed = -(reversebase + turn);
-        RightSpeed = -(reversebase - turn);
+        LeftSpeed = -(reversebase + turnL);
+        RightSpeed = -(reversebase - turnL);
     } 
       else {
-        LeftSpeed = -(reversebase - turn);
-        RightSpeed = -(reversebase + turn);
+        LeftSpeed = -(reversebase - turnR);
+        RightSpeed = -(reversebase + turnR);
       }
     }
   }
