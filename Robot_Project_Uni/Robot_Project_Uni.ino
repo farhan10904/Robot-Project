@@ -23,10 +23,10 @@ extern const unsigned long DeliveryCooldown;
 // Remove if you want
 
 void setup() {
-  void MotorSetup();
-  void SensorSetup();
-  delay(1000);
+  MotorSetup();
+  SensorSetup();
   Serial.begin(9600);
+  delay(1000);
 }
 
 void loop() {
@@ -113,17 +113,17 @@ void loop() {
     } 
     else {
       if (LastTurn == Act_Left) {
-        LeftSpeed = -(reversebase + turnL);
-        RightSpeed = -(reversebase - turnL);
+        LeftSpeed = -(reversebase + turnL/2);
+        RightSpeed = -(reversebase - turnL/2);
     } 
       else {
-        LeftSpeed = -(reversebase - turnR);
-        RightSpeed = -(reversebase + turnR);
+        LeftSpeed = -(reversebase - turnR/2);
+        RightSpeed = -(reversebase + turnR/2);
       }
     }
   }
 
   SetMotorSpeed(LeftSpeed, RightSpeed);  
-  delay(50);
+  delay(10);
 
 }
