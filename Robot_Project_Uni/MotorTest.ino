@@ -16,12 +16,28 @@ void setup() {
 
 void loop() {
 
+  digitalWrite(ForwardL, HIGH);
+  digitalWrite(ReverseL, LOW);
+  digitalWrite(ForwardR, HIGH);
+  digitalWrite(ReverseR, LOW);
+  analogWrite(ml, 150);
+  analogWrite(mr, 150);
+  delay(2000);
+
+  analogWrite(ml, 0);
+  analogWrite(mr, 0);
+  delay(2000);
+
   digitalWrite(ForwardL, LOW);
   digitalWrite(ReverseL, HIGH);
-  analogWrite(ml, 255);
-
   digitalWrite(ForwardR, LOW);
   digitalWrite(ReverseR, HIGH);
-  analogWrite(mr, 255);
+  analogWrite(ml, 150);
+  analogWrite(mr, 150);
+  delay(2000);
+  
+  analogWrite(ml, 0);
+  analogWrite(mr, 0);
+  delay(2000);
 
 }
