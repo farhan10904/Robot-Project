@@ -36,5 +36,9 @@ void ComputeMotorSpeed(int L, int C, int R, int &LeftSpeed, int &RightSpeed) {
          LeftSpeed = 0;
          RightSpeed = 0;
         }
+    else if (L == 1 && C == 1 && R == 1) {
+         LeftSpeed = base;
+         RightSpeed = base;
+     }
 }
 
