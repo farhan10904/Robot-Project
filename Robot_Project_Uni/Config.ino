@@ -17,9 +17,9 @@ const int ignorePlates[] = {3,5};
 
 const int mr = 10;
 const int ml = 9;
-const int sl = 6;
-const int sc = 5;
-const int sr = 4;
+const int sl = A0;
+const int sc = A1;
+const int sr = A2;
 //const int led = 13;
 const int LineActiveLevel = LOW;
 
@@ -27,10 +27,10 @@ const int ForwardL = 8;
 const int ReverseL = 7;
 const int ForwardR = 12;
 const int ReverseR = 11;
-const int TriggerFront = A0;
-const int ReceiveFront = A1;
-const int TriggerRear = A2;
-const int ReceiveRear = A3;
+const int TriggerFront = 4;
+const int ReceiveFront = 5;
+const int TriggerRear = 6;
+const int ReceiveRear = 13;
 
 const float PlateDistanceThreshold = 15;
 
