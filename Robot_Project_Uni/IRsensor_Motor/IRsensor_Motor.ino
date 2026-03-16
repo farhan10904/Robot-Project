@@ -1,6 +1,5 @@
 #include "Types.h"
 Action LastTurn = Act_Left;
-extern State CurrentState;
 const int sl = A0;
 const int sc = A1;
 const int sr = A2;
@@ -12,7 +11,7 @@ const int mr = 10;
 const int ml = 9;
 const int base = 150;
 const int turnL = 80;
-const int turnR = 160;
+const int turnR = 105;
 const int reversebase = base / 2;
 const int LineActiveLevel = LOW;
 int LeftSpeed = 0;
@@ -74,7 +73,6 @@ void loop() {
         LastTurn = Act_Right;
     }
     else if (L == 0 && C == 0 && R == 0) {
-        CurrentState = LostLine;
         LeftSpeed = 0;
         RightSpeed = 0;
     }
