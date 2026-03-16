@@ -17,6 +17,35 @@ const int LineActiveLevel = LOW;
 int LeftSpeed = 0;
 int RightSpeed = 0;
 
+void DriverMotor(int Speed, int ForwardPin, int ReversePin, int PWMPin) {
+
+Speed = constrain(Speed, -255, 255);
+
+if (Speed > 0) {
+  digitalWrite(ForwardPin, HIGH);
+  digitalWrite(ReversePin, LOW);
+  analogWrite(PWMPin, Speed);
+} else if (Speed < 0) {
+  digitalWrite(ForwardPin, LOW);
+  digitalWrite(ReversePin, HIGH);
+  analogWrite(PWMPin, abs(Speed));
+} else {
+  digitalWrite(ForwardPin, HIGH);
+  digitalWrite(ReversePin, HIGH); // Brake mode, both pins HIGH, or LOW for coasting
+  analogWrite(PWMPin, 0);
+
+}
+}
+
+void SetMotorSpeed(int LeftSpeed, int RightSpeed) {
+
+    DriverMotor(LeftSpeed, ForwardL, ReverseL, ml);
+    DriverMotor(RightSpeed, ForwardR, ReverseR, mr);
+
+}
+
+
+
 void setup() {
   pinMode(mr, OUTPUT);
   pinMode(ml, OUTPUT);
@@ -46,7 +75,6 @@ void loop() {
     Serial.print(C);
     Serial.print(" | Right: ");
     Serial.println(R);
-    delay(500); 
 
     if (L == 0 && C == 1 && R == 0) {
         LeftSpeed = base;
@@ -73,13 +101,22 @@ void loop() {
         LastTurn = Act_Right;
     }
     else if (L == 0 && C == 0 && R == 0) {
-        LeftSpeed = 0;
-        RightSpeed = 0;
+        if (LastTurn == Act_Left) {
+            LeftSpeed = -reversebase;
+            RightSpeed = reversebase;
+        } else {
+            LeftSpeed = reversebase;
+            RightSpeed = -reversebase;
+        }
     }
     else if (L == 1 && C == 1 && R == 1) {
         LeftSpeed = base;
         RightSpeed = base;
+        
     }
-
+    
+    SetMotorSpeed(LeftSpeed, RightSpeed);
+    
+    delay(100);
 
 }
