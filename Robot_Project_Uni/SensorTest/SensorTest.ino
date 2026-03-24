@@ -1,6 +1,6 @@
-const int sl = 6;
-const int sc = 5;
-const int sr = 4;
+const int sl = A0;
+const int sc = A1;
+const int sr = A2;
 
 void setup() {
 

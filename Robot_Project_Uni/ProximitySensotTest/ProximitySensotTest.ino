@@ -1,7 +1,7 @@
-const int TriggerFront = A0;
-const int ReceiveFront = A1;
-const int TriggerRear = A2;
-const int ReceiveRear = A3;
+const int TriggerFront = 4;
+const int ReceiveFront = 5;
+const int TriggerRear = 6;
+const int ReceiveRear = 13;
 
 void setup() {
     pinMode(TriggerFront, OUTPUT);
