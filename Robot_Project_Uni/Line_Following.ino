@@ -3,7 +3,7 @@
 
 extern State CurrentState;
 extern Action LastTurn;
-extern const int base,turnR, turnL;
+extern const int base, slightslow, slightfast, hardslow, hardfast;
 extern const int reversebase;
 
 void ComputeMotorSpeed(int L, int C, int R, int &LeftSpeed, int &RightSpeed) { 
@@ -12,23 +12,23 @@ void ComputeMotorSpeed(int L, int C, int R, int &LeftSpeed, int &RightSpeed) {
          RightSpeed = base;
      }
      else if (L == 1 && C == 0 && R == 0) {
-         LeftSpeed = base - turnL;
-         RightSpeed = base + turnL;
+         LeftSpeed = hardslow;
+         RightSpeed = hardfast;
          LastTurn = Act_Left;
      }
      else if (L == 0 && C == 0 && R == 1) {
-         LeftSpeed = base + turnR;
-         RightSpeed = base - turnR;
+         LeftSpeed = hardfast;
+         RightSpeed = hardslow;
          LastTurn = Act_Right;
      }
      else if (L == 1 && C == 1 && R == 0) {
-         LeftSpeed = base - (turnL / 2);
-         RightSpeed = base + (turnL / 2);
+         LeftSpeed = slightslow;
+         RightSpeed = slightfast;
          LastTurn = Act_Left;
      }
      else if (L == 0 && C == 1 && R == 1) {
-         LeftSpeed = base + (turnR / 2);
-         RightSpeed = base - (turnR / 2);
+         LeftSpeed = slightfast;
+         RightSpeed = slightslow;
          LastTurn = Act_Right;
      }
      else if (L == 0 && C == 0 && R == 0) {
@@ -40,5 +40,12 @@ void ComputeMotorSpeed(int L, int C, int R, int &LeftSpeed, int &RightSpeed) {
          LeftSpeed = base;
          RightSpeed = base;
      }
+
+    Serial.print("L: ");
+    Serial.print(L);
+    Serial.print("  C: ");
+    Serial.print(C);
+    Serial.print("  R: ");
+    Serial.println(R);
 }
 
