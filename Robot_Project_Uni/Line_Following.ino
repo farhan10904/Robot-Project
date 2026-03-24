@@ -47,5 +47,9 @@ void ComputeMotorSpeed(int L, int C, int R, int &LeftSpeed, int &RightSpeed) {
     Serial.print(C);
     Serial.print("  R: ");
     Serial.println(R);
+    Serial.print(" | LS: ");
+    Serial.print(LeftSpeed);
+    Serial.print(" RS: ");
+    Serial.println(RightSpeed);
 }
 
