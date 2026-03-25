@@ -10,9 +10,9 @@ I am the sole software engineer on the team. All embedded firmware was written, 
 
 ## Photos
 
-![Robot overview](images/overview.jpg)
-![Front sensors](images/front.jpg)
-![Internal wiring and motors](images/internals.jpg)
+![Robot overview](images/Overview.jpg)
+![Front sensors](images/Front.jpg)
+![Internal wiring and motors](images/Wiring.jpg)
 
 ---
 
