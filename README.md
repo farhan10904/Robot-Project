@@ -8,6 +8,14 @@ I am the sole software engineer on the team. All embedded firmware was written, 
 
 ---
 
+## Photos
+
+![Robot overview](images/overview.jpg)
+![Front sensors](images/front.jpg)
+![Internal wiring and motors](images/internals.jpg)
+
+---
+
 ## System Overview
 
 The control system is built around a **dual-layer finite state machine** managing 4 operational states:
@@ -136,13 +144,12 @@ The robot successfully completed line following and delivery sequences during un
 
 - PID implementation for smoother cornering at higher speeds
 - Interrupt-driven sensor reading for reduced latency
-- Selective plate ignoring based on `ignorePlates[]` config array (currently reserved)
 
 ---
 
 ## Author
 
-**Muhammed Farhan Ali** — Software Engineer
+**Farhan Ali** — Software Engineer
 [GitHub](https://github.com/farhan10904) | [Portfolio](https://pacific-attention-6cd.notion.site/Farhan-Ali-Engineering-Portfolio-2c0495dbdc658028a0decf9447459ea6) | [LinkedIn](https://www.linkedin.com/in/farhan-ali-95047a245/)
 
-*Mechanical design, and CAD completed by other team members.*
+*Mechanical design and CAD completed by other team members.*
