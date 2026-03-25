@@ -8,14 +8,6 @@ I am the sole software engineer on the team. All embedded firmware was written, 
 
 ---
 
-## Demo
-
-> Robot navigating a line track and performing a package delivery sequence.
-
-*(Video/GIF to be added)*
-
----
-
 ## System Overview
 
 The control system is built around a **dual-layer finite state machine** managing 4 operational states:
