@@ -1,5 +1,5 @@
 #include "Types.h"
-bool SimMode = true;
+bool SimMode = false;
 Action LastTurn = Act_Left;
 State CurrentState = FollowLine;
 const int base = 150;
@@ -15,14 +15,12 @@ unsigned long FrontSeenTime = 0;
 const unsigned long FrontTimeoutMS = 500;
 int PlateHits = 0;
 int DeliveriesDone = 0;
-const int ignorePlates[] = {3,5};
 
 const int mr = 10;
 const int ml = 9;
 const int sl = A0;
 const int sc = A1;
 const int sr = A2;
-//const int led = 13;
 const int LineActiveLevel = LOW;
 
 const int ForwardL = 8;

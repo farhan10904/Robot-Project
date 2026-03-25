@@ -6,21 +6,20 @@
 extern State CurrentState;
 extern Action LastTurn;
 extern const int base;
-extern const int turnL, turnR;
+extern const int slightslow, slightfast;
+extern const int hardslow, hardfast;
 extern const int reversebase; 
 extern bool SimMode, CoolDown;
-// Keep all of the above
 
 extern bool FrontSeenForPlate;
 extern bool PrevFront, PrevRear;
 extern const unsigned long FrontTimeoutMS;
 extern unsigned long FrontSeenTime;
-extern const int mr, ml, sl, sc, sr, led, TriggerFront, ReceiveFront, TriggerRear, ReceiveRear, StepPin, DirPin, ForwardL, ReverseL, ForwardR, ReverseR; 
+extern const int mr, ml, sl, sc, sr,TriggerFront, ReceiveFront, TriggerRear, ReceiveRear, StepPin, DirPin, ForwardL, ReverseL, ForwardR, ReverseR; 
 extern int DeliveriesDone, PlateHits;
 extern const float PlateDistanceThreshold;
 extern unsigned long LastDeliveryTime; 
 extern const unsigned long DeliveryCooldown;
-// Remove if you want
 
 void setup() {
   MotorSetup();
